@@ -1,4 +1,4 @@
-# img2latex-vlm with VLMs
+# img2latex with VLMs
 
 This repository contains a complete MLOps pipeline for training and serving a PDF-to-LaTeX model on Google Cloud Platform (GCP) using Vertex AI.
 
