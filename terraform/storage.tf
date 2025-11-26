@@ -3,7 +3,7 @@ resource "random_id" "bucket_suffix" {
 }
 
 resource "google_storage_bucket" "main_bucket" {
-  name          = "pdf2latex-storage-${random_id.bucket_suffix.hex}"
+  name          = "img2latex-vlm-storage-${random_id.bucket_suffix.hex}"
   location      = var.region
   force_destroy = false
 

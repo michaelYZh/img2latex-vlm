@@ -2,7 +2,7 @@ import math
 
 import pytest
 
-from pdf2latex.metrics import (
+from img2latex_vlm.metrics import (
     latex_tokens,
     metric_exact_match,
     metric_normalized_edit_similarity,

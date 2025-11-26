@@ -34,7 +34,7 @@ if TYPE_CHECKING:
     from transformers.trainer_utils import EvalPrediction, PredictionOutput
     from transformers.training_args import TrainingArguments
 
-class Pdf2LatexTrainer(Seq2SeqTrainer):
+class Img2LatexVLMTrainer(Seq2SeqTrainer):
     
     def prediction_step(
         self,

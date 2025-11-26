@@ -1,5 +1,5 @@
 [project]
-name = "pdf2latex-llm"
+name = "img2latex-vlm"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"

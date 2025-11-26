@@ -31,11 +31,11 @@ RUN pip install --no-cache-dir \
     flash-attn --no-build-isolation
 
 # Copy source code
-COPY pdf2latex/ pdf2latex/
+COPY img2latex_vlm/ img2latex_vlm/
 COPY scripts/ scripts/
 
 # Set python path
 ENV PYTHONPATH=/app
 
 # Entrypoint
-ENTRYPOINT ["python", "-m", "pdf2latex.train"]
+ENTRYPOINT ["python", "-m", "img2latex_vlm.train"]

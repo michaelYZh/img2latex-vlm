@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=pdf2latex_train
+#SBATCH --job-name=img2latex_vlm_train
 #SBATCH --partition=gpunodes
 #SBATCH --gres=gpu:rtx_a6000:1
 #SBATCH --time=24:00:00
@@ -11,7 +11,7 @@
 
 source ~/miniconda3/etc/profile.d/conda.sh
 
-cd /u/scottc/pdf2latex_llm
-conda activate pdf2latex
+cd /u/scottc/img2latex-vlm
+conda activate img2latex-vlm
 
-python pdf2latex/train.py
+python img2latex_vlm/train.py

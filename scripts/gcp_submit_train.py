@@ -19,7 +19,7 @@ def submit_training_job(
     job = aiplatform.CustomContainerTrainingJob(
         display_name=display_name,
         container_uri=container_uri,
-        # command=["python", "-m", "pdf2latex.train"], # Entrypoint is already set in Dockerfile
+        # command=["python", "-m", "img2latex_vlm.train"], # Entrypoint is already set in Dockerfile
     )
 
     scheduling_strategy = None
@@ -46,7 +46,7 @@ if __name__ == "__main__":
     parser.add_argument("--project_id", required=True, type=str)
     parser.add_argument("--location", default="us-central1", type=str)
     parser.add_argument("--staging_bucket", required=True, type=str)
-    parser.add_argument("--display_name", default="pdf2latex-train", type=str)
+    parser.add_argument("--display_name", default="img2latex-vlm-train", type=str)
     parser.add_argument("--container_uri", required=True, type=str)
     parser.add_argument("--dataset_path", required=True, type=str)
     parser.add_argument("--output_dir", required=True, type=str)

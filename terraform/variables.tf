@@ -13,5 +13,5 @@ variable "region" {
 variable "repo_name" {
   description = "The name of the Artifact Registry repository to create."
   type        = string
-  default     = "pdf2latex-repo"
+  default     = "img2latex-vlm-repo"
 }

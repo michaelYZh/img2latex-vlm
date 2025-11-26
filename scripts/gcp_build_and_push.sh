@@ -18,13 +18,13 @@ echo "Building and pushing images for Project: $PROJECT_ID, Region: $REGION, Rep
 gcloud auth configure-docker ${REGION}-docker.pkg.dev
 
 # Build and Push Training Image
-TRAIN_IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/pdf2latex-train:latest"
+TRAIN_IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/img2latex-vlm-train:latest"
 echo "Building Training Image: $TRAIN_IMAGE"
 docker build --platform linux/amd64 -t $TRAIN_IMAGE -f Dockerfile.train .
 docker push $TRAIN_IMAGE
 
 # Build and Push Serving Image
-SERVE_IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/pdf2latex-serve:latest"
+SERVE_IMAGE="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/img2latex-vlm-serve:latest"
 echo "Building Serving Image: $SERVE_IMAGE"
 docker build --platform linux/amd64 -t $SERVE_IMAGE -f Dockerfile.serve .
 docker push $SERVE_IMAGE

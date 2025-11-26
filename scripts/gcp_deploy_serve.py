@@ -89,7 +89,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Deploy model to Vertex AI")
     parser.add_argument("--project_id", required=True, type=str)
     parser.add_argument("--location", default="us-central1", type=str)
-    parser.add_argument("--display_name", default="pdf2latex-model", type=str)
+    parser.add_argument("--display_name", default="img2latex-vlm-model", type=str)
     parser.add_argument("--serving_container_uri", required=True, type=str)
     parser.add_argument("--model_artifact_uri", type=str, help="GCS path to model artifacts")
     parser.add_argument("--hf_model_id", type=str, help="Hugging Face Model ID")

@@ -16,7 +16,7 @@ from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, TaskType
 
 import metrics
-from pdf2latex_trainer import Pdf2LatexTrainer
+from img2latex_vlm_trainer import Img2LatexVLMTrainer
 import utils
 from PIL import Image
 
@@ -25,7 +25,7 @@ torch.backends.cudnn.allow_tf32 = True
 # (Optional on PyTorch 2.x)
 torch.set_float32_matmul_precision("high")
 
-wandb.init(project="pdf2latex_llm")
+wandb.init(project="img2latex_vlm")
 
 # this processor is responsible for processing both images and texts for the model
 processor = AutoProcessor.from_pretrained(
@@ -40,7 +40,7 @@ tokenizer = processor.tokenizer
 import argparse
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train PDF to LaTeX model")
+    parser = argparse.ArgumentParser(description="Train Image to LaTeX VLM")
     parser.add_argument(
         "--dataset_path", 
         type=str, 
@@ -291,7 +291,7 @@ training_args = Seq2SeqTrainingArguments(
     generation_config=eval_generation_config,
 )
 
-trainer = Pdf2LatexTrainer(
+trainer = Img2LatexVLMTrainer(
     model=model,
     args=training_args,
     processing_class=processor,

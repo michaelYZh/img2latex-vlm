@@ -1,4 +1,4 @@
-# pdf2latex with VLMs
+# img2latex-vlm with VLMs
 
 This repository contains a complete MLOps pipeline for training and serving a PDF-to-LaTeX model on Google Cloud Platform (GCP) using Vertex AI.
 
@@ -6,8 +6,8 @@ This repository contains a complete MLOps pipeline for training and serving a PD
 
 ### CUDA (Linux/Windows)
 ```sh
-conda create -n pdf2latex python=3.11 -y
-conda activate pdf2latex
+conda create -n img2latex-vlm python=3.11 -y
+conda activate img2latex-vlm
 pip install notebook tqdm wandb
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu129
 pip install transformers datasets accelerate peft flash-attn --no-build-isolation
@@ -52,7 +52,7 @@ Generate the dataset and stage the model artifacts to GCS.
 
 **Generate Dataset:**
 ```sh
-uv run python pdf2latex/data_process.py
+uv run python img2latex_vlm/data_process.py
 # Upload to GCS
 gcloud storage cp datasets/latex80m_en_1m.parquet gs://YOUR_BUCKET/datasets/
 ```
@@ -61,8 +61,8 @@ gcloud storage cp datasets/latex80m_en_1m.parquet gs://YOUR_BUCKET/datasets/
 Download the model and upload it to your bucket for controlled serving.
 ```sh
 uv run python scripts/stage_model.py \
-    --repo_id scottcfy/Qwen2-VL-2B-Instruct-pdf2latex \
-    --gcs_uri gs://YOUR_BUCKET/models/pdf2latex-v1 \
+    --repo_id scottcfy/Qwen2-VL-2B-Instruct-img2latex-vlm \
+    --gcs_uri gs://YOUR_BUCKET/models/img2latex-vlm-v1 \
     --project_id YOUR_PROJECT_ID
 ```
 
@@ -71,7 +71,7 @@ Build the training and serving containers and push them to Artifact Registry.
 
 ```sh
 # Usage: ./scripts/gcp_build_and_push.sh <PROJECT_ID> <REGION> <REPO_NAME>
-./scripts/gcp_build_and_push.sh YOUR_PROJECT_ID us-central1 pdf2latex-repo
+./scripts/gcp_build_and_push.sh YOUR_PROJECT_ID us-central1 img2latex-vlm-repo
 ```
 
 ### 4. Training (Optional)
@@ -82,8 +82,8 @@ uv run python scripts/gcp_submit_train.py \
     --project_id YOUR_PROJECT_ID \
     --location us-central1 \
     --staging_bucket gs://YOUR_BUCKET \
-    --display_name pdf2latex-train \
-    --container_uri us-central1-docker.pkg.dev/YOUR_PROJECT_ID/pdf2latex-repo/pdf2latex-train:latest \
+    --display_name img2latex-vlm-train \
+    --container_uri us-central1-docker.pkg.dev/YOUR_PROJECT_ID/img2latex-vlm-repo/img2latex-vlm-train:latest \
     --dataset_path gs://YOUR_BUCKET/datasets/latex80m_en_1m.parquet \
     --output_dir gs://YOUR_BUCKET/outputs/run1 \
     --use_spot  # Use Spot instances for cost savings
@@ -97,16 +97,16 @@ Deploy the model to a Vertex AI Endpoint. The serving container supports loading
 uv run python scripts/gcp_deploy_serve.py \
     --project_id YOUR_PROJECT_ID \
     --location us-central1 \
-    --display_name pdf2latex-serve \
-    --serving_container_uri us-central1-docker.pkg.dev/YOUR_PROJECT_ID/pdf2latex-repo/pdf2latex-serve:latest \
-    --model_artifact_uri gs://YOUR_BUCKET/models/pdf2latex-v1
+    --display_name img2latex-vlm-serve \
+    --serving_container_uri us-central1-docker.pkg.dev/YOUR_PROJECT_ID/img2latex-vlm-repo/img2latex-vlm-serve:latest \
+    --model_artifact_uri gs://YOUR_BUCKET/models/img2latex-vlm-v1
 ```
 
 **Deploy from Hugging Face directly:**
 ```sh
 uv run python scripts/gcp_deploy_serve.py \
     ...
-    --hf_model_id scottcfy/Qwen2-VL-2B-Instruct-pdf2latex
+    --hf_model_id scottcfy/Qwen2-VL-2B-Instruct-img2latex-vlm
 ```
 
 ### 6. Testing
