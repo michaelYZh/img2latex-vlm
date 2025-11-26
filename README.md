@@ -25,6 +25,12 @@ uv sync
 ssh -L 8001:gpunode24:8000 cs.edu
 ```
 
+```
+vllm serve Qwen/Qwen2-VL-2B-Instruct \
+    --port 8000 \
+    --gpu-memory-utilization 0.9
+```
+
 ## ☁️ GCP MLOps Pipeline
 
 ### Prerequisites
