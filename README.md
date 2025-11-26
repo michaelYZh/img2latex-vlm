@@ -113,9 +113,9 @@ uv run python scripts/gcp_deploy_serve.py \
 Verify the deployed endpoint by sending a sample image.
 
 ```sh
-uv run python scripts/test_endpoint.py \
+uv run python tests/test_endpoint.py \
     --endpoint_id YOUR_ENDPOINT_ID \
-    --image_path test_image.png
+    --image_path tests/test_image.png
 ```
 
 ## 🔌 Integration Guide

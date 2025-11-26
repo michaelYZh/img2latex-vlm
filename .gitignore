@@ -222,4 +222,3 @@ outputs/*
 .terraform.lock.hcl
 *.tfstate
 *.tfstate.backup
-*.png
